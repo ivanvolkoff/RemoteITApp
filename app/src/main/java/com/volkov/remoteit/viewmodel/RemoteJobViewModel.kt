@@ -34,6 +34,10 @@ class RemoteJobViewModel(
 
     fun getAllJob() = remoteJobRepository.getAllJobs()
 
+    fun searchRemoteJob(query:String?) = remoteJobRepository.searchRemoteJob(query)
+
+    fun searchResult() = remoteJobRepository.getSearchJobResponseLiveData()
+
 
 
 }

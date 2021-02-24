@@ -42,34 +42,33 @@ class RemoteJobRepository (private val db: SavedJobsDatabase){
             })
     }
 
-//
-//    fun searchRemoteJob(query: String?) {
-//        remoteJobService.searchRemoteJob(query).enqueue(
-//            object : Callback<RemoteJob> {
-//                override fun onResponse(call: Call<RemoteJob>, response: Response<RemoteJob>) {
-//                    if (response.body() != null) {
-//                        searchRemoteJobLiveData().postValue(response.body())
-//                    }
-//                }
-//
-//                override fun onFailure(call: Call<RemoteJob>, t: Throwable) {
-//                    searchRemoteJobLiveData.postValue(null)
-//                    Log.d("error ibm", t.message.toString())
-//                }
-//
-//            }
-//        )
-//
-//    }
+
+    fun searchRemoteJob(query: String?) {
+        remoteJobService.searchRemoteJob(query).enqueue(
+            object : Callback<RemoteJob> {
+                override fun onResponse(call: Call<RemoteJob>, response: Response<RemoteJob>) {
+                    searchRemoteJobLiveData.postValue(response.body())
+
+                }
+
+                override fun onFailure(call: Call<RemoteJob>, t: Throwable) {
+                    searchRemoteJobLiveData.postValue(null)
+                    Log.d("error ibm", t.message.toString())
+                }
+
+            }
+        )
+
+    }
 
 
     fun getRemoteJobResponseLiveData(): LiveData<RemoteJob> {
         return remoteJobResponseLiveData
     }
 
-//    fun getSearchJobResponseLiveData(): LiveData<RemoteJob> {
-//        return searchRemoteJob()
-//    }
+    fun getSearchJobResponseLiveData(): LiveData<RemoteJob> {
+        return searchRemoteJobLiveData
+    }
 
 
     suspend fun insertJob(job: JobToSave) = db.getRemoteJobDao().insertJob(job)
