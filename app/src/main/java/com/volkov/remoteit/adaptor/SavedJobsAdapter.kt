@@ -1,6 +1,7 @@
 package com.volkov.remoteit.adaptor
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.volkov.remoteit.databinding.JobLayoutAdapterBinding
 import com.volkov.remoteit.fragments.MainFragmentDirections
-import com.volkov.remoteit.fragments.SavedJobFragment
 import com.volkov.remoteit.model.Job
 import com.volkov.remoteit.model.JobToSave
 
 
-class SavedJobsAdapter( private val itemClick: SavedJobFragment) : RecyclerView.Adapter<SavedJobsAdapter.JobHolder>() {
+class SavedJobsAdapter constructor(private val itemClick: OnItemClickListener) :
+    RecyclerView.Adapter<SavedJobsAdapter.JobHolder>() {
 
     private var binding: JobLayoutAdapterBinding? = null
 
@@ -52,11 +53,12 @@ class SavedJobsAdapter( private val itemClick: SavedJobFragment) : RecyclerView.
             binding?.tvJobLocation?.text = currentJob.candidateRequiredLocation
             binding?.tvJobTitle?.text = currentJob.title
             binding?.tvJobType?.text = currentJob.jobType
+            binding?.ibDelete?.visibility = View.VISIBLE
+
 
             val dateJob = currentJob.publicationDate?.split("T")
             binding?.tvDate?.text = dateJob?.get(0)
-        }.setOnClickListener{
-            mView ->
+        }.setOnClickListener { mView ->
             val tags = arrayListOf<String>()
             val job = Job(
                 currentJob.candidateRequiredLocation,
@@ -70,9 +72,16 @@ class SavedJobsAdapter( private val itemClick: SavedJobFragment) : RecyclerView.
                 currentJob.salary,
                 tags,
                 currentJob.title,
-                currentJob.url)
+                currentJob.url
+            )
             var direction = MainFragmentDirections.actionMainFragmentToJobDetailsFragment(job!!)
             mView.findNavController().navigate(direction)
+        }
+
+        holder.itemView.apply {
+            binding?.ibDelete?.setOnClickListener{
+                itemClick.onItemClick(currentJob, binding?.ibDelete!!,position)
+            }
         }
 
     }
@@ -83,8 +92,13 @@ class SavedJobsAdapter( private val itemClick: SavedJobFragment) : RecyclerView.
 
 
     inner class JobHolder(itemBinding: JobLayoutAdapterBinding) :
-        RecyclerView.ViewHolder(itemBinding.root) {
+        RecyclerView.ViewHolder(itemBinding.root)
 
-
+    interface OnItemClickListener {
+        fun onItemClick(
+            job: JobToSave,
+            view: View,
+            position: Int
+        )
     }
 }
