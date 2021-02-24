@@ -2,12 +2,12 @@ package com.volkov.remoteit.fragments
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -75,6 +75,8 @@ class RemoteJobFragment : Fragment(R.layout.fragment_remote_job),
     }
 
     private fun fetchingData() {
+
+
         activity?.let {
             if (Constansts.isNetworkAvailable(requireActivity())) {
 

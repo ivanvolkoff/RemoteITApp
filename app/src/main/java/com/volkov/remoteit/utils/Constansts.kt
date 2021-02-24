@@ -8,6 +8,7 @@ object Constansts {
     const val BASE_URL = "https://remotive.io/api/"
     const val TAG = "error api"
 
+
     fun isNetworkAvailable(context: Context): Boolean {
         // It answers the queries about the state of network connectivity.
         val connectivityManager =

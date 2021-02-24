@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.volkov.remoteit.MainActivity
 import com.volkov.remoteit.R
 import com.volkov.remoteit.adaptor.JobRecyclerViewAdapter
 import com.volkov.remoteit.databinding.FragmentSearchJobBinding
+import com.volkov.remoteit.utils.Constansts
 import com.volkov.remoteit.viewmodel.RemoteJobViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
@@ -45,8 +47,16 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
 
         viewModel = (activity as MainActivity).viewModel
 
-        searchJob()
-        setUpRecyclerView()
+
+        if(Constansts.isNetworkAvailable(requireContext())){
+            searchJob()
+            setUpRecyclerView()
+        }
+        else{
+            Toast.makeText(activity,"There's no internet connection",Toast.LENGTH_SHORT).show()
+        }
+
+
 
     }
 
