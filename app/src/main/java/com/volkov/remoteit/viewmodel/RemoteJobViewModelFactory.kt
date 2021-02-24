@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.volkov.remoteit.repository.RemoteJobRepository
 
+@Suppress("UNCHECKED_CAST")
 class RemoteJobViewModelFactory(
     val app: Application,
     private val remoteJobRepository: RemoteJobRepository

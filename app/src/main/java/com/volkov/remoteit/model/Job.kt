@@ -1,8 +1,11 @@
 package com.volkov.remoteit.model
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Job(
     @SerializedName("candidate_required_location")
     val candidateRequiredLocation: String?,
@@ -28,4 +31,4 @@ data class Job(
     val title: String?,
     @SerializedName("url")
     val url: String?
-)
+):Parcelable
