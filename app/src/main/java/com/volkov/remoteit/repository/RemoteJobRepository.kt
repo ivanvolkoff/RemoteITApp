@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.volkov.remoteit.api.RemoteJobResponse
 import com.volkov.remoteit.api.RetrofitInstance
-import com.volkov.remoteit.db.RemoteJobDatabase
+import com.volkov.remoteit.db.SavedJobsDatabase
 import com.volkov.remoteit.model.Job
 import com.volkov.remoteit.model.JobToSave
 import com.volkov.remoteit.model.RemoteJob
@@ -16,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class RemoteJobRepository (private val db: RemoteJobDatabase){
+class RemoteJobRepository (private val db: SavedJobsDatabase){
     private var remoteJobService = RetrofitInstance.apiService
     private var remoteJobResponseLiveData: MutableLiveData<RemoteJob> = MutableLiveData()
     private val searchRemoteJobLiveData: MutableLiveData<RemoteJob> = MutableLiveData()

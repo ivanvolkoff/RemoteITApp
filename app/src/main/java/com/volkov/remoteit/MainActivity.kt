@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.volkov.remoteit.databinding.ActivityMainBinding
-import com.volkov.remoteit.db.RemoteJobDatabase
+import com.volkov.remoteit.db.SavedJobsDatabase
 import com.volkov.remoteit.repository.RemoteJobRepository
 import com.volkov.remoteit.viewmodel.RemoteJobViewModel
 import com.volkov.remoteit.viewmodel.RemoteJobViewModelFactory
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun setUpViewModel() {
 
         val remoteJobRepository = RemoteJobRepository(
-            RemoteJobDatabase(this)
+            SavedJobsDatabase(this)
         )
 
         val viewModelProviderFactory =

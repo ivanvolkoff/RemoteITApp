@@ -8,13 +8,13 @@ import com.volkov.remoteit.model.JobToSave
 
 
 @Database(entities = [JobToSave::class], version = 1)
-abstract class RemoteJobDatabase : RoomDatabase() {
+abstract class SavedJobsDatabase : RoomDatabase() {
 
-    abstract fun getRemoteJobDao(): RemoteJobDao
+    abstract fun getRemoteJobDao(): SavedJobsDao
 
     companion object {
         @Volatile
-        private var instance: RemoteJobDatabase? = null
+        private var instance: SavedJobsDatabase? = null
         private val LOCK = Any()
 
         operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
@@ -24,8 +24,8 @@ abstract class RemoteJobDatabase : RoomDatabase() {
         private fun createDatabase(context: Context) =
             Room.databaseBuilder(
                 context.applicationContext,
-                RemoteJobDatabase::class.java,
-                "remoteJob_db2"
+                SavedJobsDatabase::class.java,
+                "saved_jobs"
             ).build()
     }
 }

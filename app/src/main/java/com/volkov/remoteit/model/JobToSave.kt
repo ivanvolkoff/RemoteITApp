@@ -4,7 +4,7 @@ package com.volkov.remoteit.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "job")
+@Entity(tableName = "saved_jobs")
 data class JobToSave(
     @PrimaryKey(autoGenerate = true)
     val id: Int,

@@ -6,12 +6,12 @@ import com.volkov.remoteit.model.JobToSave
 
 
 @Dao
-interface RemoteJobDao {
+interface SavedJobsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertJob(job: JobToSave): Long
 
-    @Query("SELECT * FROM job ORDER BY id DESC")
+    @Query("SELECT * FROM saved_jobs ORDER BY id DESC")
     fun getAllJob(): LiveData<List<JobToSave>>
 
     @Delete
