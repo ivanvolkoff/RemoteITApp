@@ -58,6 +58,21 @@ class JobDetailsFragment : Fragment(R.layout.fragment_job_details_views) {
         binding.webView.apply {
             webViewClient = WebViewClient()
             currentJob.url?.let { loadUrl(it) }
+
+
+            val settings = binding.webView.settings
+            settings.javaScriptEnabled = true
+            settings.setAppCacheEnabled(true)
+            settings.cacheMode = WebSettings.LOAD_DEFAULT
+            settings.setSupportZoom(false)
+            settings.builtInZoomControls = false
+            settings.displayZoomControls = false
+            settings.textZoom = 100
+            settings.blockNetworkImage = false
+            settings.loadsImagesAutomatically = true
+
+
+
         }
 
         binding.webView.settings.apply {
