@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.volkov.remoteit.MainActivity
 import com.volkov.remoteit.R
@@ -84,10 +85,10 @@ class SearchJobFragment : Fragment(R.layout.fragment_search_job) {
             setHasFixedSize(true)
             adapter = jobAdaprer
         }
-        viewModel.searchResult().observe(viewLifecycleOwner, {
+        viewModel.searchResult().observe(viewLifecycleOwner
+        ) {
             jobAdaprer.differ.submitList(it.jobs)
         }
-        )
     }
 
     override fun onDestroy() {

@@ -3,13 +3,10 @@ package com.volkov.remoteit.repository
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.volkov.remoteit.api.RemoteJobResponse
 import com.volkov.remoteit.api.RetrofitInstance
 import com.volkov.remoteit.db.SavedJobsDatabase
-import com.volkov.remoteit.model.Job
 import com.volkov.remoteit.model.JobToSave
 import com.volkov.remoteit.model.RemoteJob
-import com.volkov.remoteit.utils.Constansts.TAG
 
 import retrofit2.Call
 import retrofit2.Callback

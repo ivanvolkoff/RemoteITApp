@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.volkov.remoteit.MainActivity
 import com.volkov.remoteit.R
@@ -46,14 +45,14 @@ class SavedJobFragment : Fragment(R.layout.fragment_saved_job),
         binding.rvJobsSaved.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
-            addItemDecoration(object : DividerItemDecoration(activity, LinearLayout.HORIZONTAL) {})
+
             adapter = savedJobsAdapter
         }
 
-        viewModel.getAllJob().observe(viewLifecycleOwner, { savedJob ->
+        viewModel.getAllJob().observe(viewLifecycleOwner) { savedJob ->
             savedJobsAdapter.differ.submitList(savedJob)
             updateUI(savedJob)
-        })
+        }
     }
 
     private fun updateUI(savedJob: List<JobToSave>) {
