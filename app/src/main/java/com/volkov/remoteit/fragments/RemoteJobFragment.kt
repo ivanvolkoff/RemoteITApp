@@ -62,8 +62,11 @@ class RemoteJobFragment : Fragment(R.layout.fragment_remote_job),
     }
 
     private fun setUpRecyclerView() {
+
         jobRecyclerViewAdapter = JobRecyclerViewAdapter()
-        binding.rvRemoteJobs.apply {
+
+
+          binding.rvRemoteJobs.apply {
             layoutManager = LinearLayoutManager(activity)
             setHasFixedSize(true)
             addItemDecoration(
@@ -82,7 +85,6 @@ class RemoteJobFragment : Fragment(R.layout.fragment_remote_job),
 
                 remoteJobViewModel.remoteJobResult()
                     .observe(viewLifecycleOwner, { remoteJob ->
-                        // Toast.makeText(activity, "$remoteJob", Toast.LENGTH_SHORT).show()
                         if (remoteJob != null) {
                             jobRecyclerViewAdapter.differ.submitList(remoteJob.jobs)
                             swipeRefreshLayout.isRefreshing = false
