@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -79,17 +80,16 @@ class RemoteJobFragment : Fragment(R.layout.fragment_remote_job),
 
     private fun fetchingData() {
 
-
         activity?.let {
             if (Constansts.isNetworkAvailable(requireActivity())) {
 
                 remoteJobViewModel.remoteJobResult()
-                    .observe(viewLifecycleOwner, { remoteJob ->
+                    .observe(viewLifecycleOwner) { remoteJob ->
                         if (remoteJob != null) {
                             jobRecyclerViewAdapter.differ.submitList(remoteJob.jobs)
                             swipeRefreshLayout.isRefreshing = false
                         }
-                    })
+                    }
             } else {
                 Toast.makeText(activity, "No internet connection", Toast.LENGTH_SHORT).show()
                 swipeRefreshLayout.isRefreshing = false
